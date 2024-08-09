@@ -22,7 +22,7 @@ public class Main {
 
 
           OutputStream outputStream = clientSocket.getOutputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             while((clientInput = bufferedReader.readLine())!=null){
                 outputStream.write("+PONG\\r\\n".getBytes());
             }

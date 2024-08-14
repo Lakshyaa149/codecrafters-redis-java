@@ -29,7 +29,13 @@ public class Main {
               // Wait for connection from client.
               clientSocket = serverSocket.accept();
               Socket finalClientSocket = clientSocket;
-              executorService.submit(()-> protocolHandler.handleRequestAndResponse(finalClientSocket));
+              executorService.submit(()-> {
+                  try {
+                      protocolHandler.handleRequestAndResponse(finalClientSocket);
+                  } catch (IOException e) {
+                      throw new RuntimeException(e);
+                  }
+              });
           }
         } catch (IOException e) {
           System.out.println("IOException: " + e.getMessage());

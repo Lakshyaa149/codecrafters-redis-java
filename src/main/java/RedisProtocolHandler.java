@@ -11,6 +11,7 @@ public class RedisProtocolHandler {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         String line = bufferedReader.readLine();
+        System.out.println("line "+ line);
         String response = null;
         if(line.equalsIgnoreCase("echo")) {
             bufferedReader.readLine();

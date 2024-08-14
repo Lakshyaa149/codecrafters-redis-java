@@ -6,20 +6,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 
-class RedisConcurrentTask implements Runnable{
-
-    @Override
-    public void run() {
-
-
-    }
-}
 
 public class Main {
 
-
-
-  public static void main(String[] args){
+    public static void main(String[] args){
     // You can use print statements as follows for debugging, they'll be visible when running tests.
     System.out.println("Logs from your program will appear here!");
     ExecutorService executorService = Executors.newFixedThreadPool(10);
@@ -30,15 +20,16 @@ public class Main {
         int port = 6379;
         try {
           serverSocket = new ServerSocket(port);
-          // Since the tester restarts your program quite often, setting SO_REUSEADDR
+          // Since the tester restarts your program quite often, setting SO_REUSEADDR.
           // ensures that we don't run into 'Address already in use' errors
           serverSocket.setReuseAddress(true);
+          RedisProtocolHandler protocolHandler = new RedisProtocolHandler();
 
-          while( true){
+          while(true){
               // Wait for connection from client.
               clientSocket = serverSocket.accept();
               Socket finalClientSocket = clientSocket;
-              executorService.submit(()-> processRequest(finalClientSocket));
+              executorService.submit(()-> protocolHandler.handleRequestAndResponse(finalClientSocket));
           }
         } catch (IOException e) {
           System.out.println("IOException: " + e.getMessage());

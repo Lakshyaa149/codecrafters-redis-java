@@ -12,7 +12,7 @@ public class RedisProtocolHandler {
 
         String line = bufferedReader.readLine();
         String response = null;
-        while (line.equalsIgnoreCase("echo")) {
+        if(line.equalsIgnoreCase("echo")) {
             bufferedReader.readLine();
             line = bufferedReader.readLine();
             response = "$" + line.length() + "\r\n" + line + "\r\n";

@@ -47,7 +47,6 @@ public class RedisProtocolHandler {
             System.out.println(ch);
         }
         skipCharacters(bufferedReader);
-        System.out.println(sb.toString());
         return sb.toString();
     }
 

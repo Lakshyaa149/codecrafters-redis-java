@@ -25,11 +25,11 @@ public class RedisProtocolHandler {
                 outputStream.write(response.getBytes());
                 outputStream.flush();
             }
-            if (command != null && command.equalsIgnoreCase("ping")) {
+            if (command.equalsIgnoreCase("ping")) {
                 outputStream.write("+PONG\r\n".getBytes());
                 outputStream.flush();
             }
-            if (command.equalsIgnoreCase("SET")){
+            if (command != null && command.equalsIgnoreCase("SET")){
                 String keyName = bufferedReader.readLine();
                 String value = bufferedReader.readLine();
                 keyValueMap.put(keyName,"$"+value.length()+"\r\n"+value+"\r\n");

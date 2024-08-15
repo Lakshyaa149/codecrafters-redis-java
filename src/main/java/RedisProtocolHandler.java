@@ -1,19 +1,18 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RedisProtocolHandler {
+
+    public static ConcurrentHashMap<String, String> keyValueMap = new ConcurrentHashMap<>();
 
     public void  handleRequestAndResponse(Socket socket) throws IOException {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         OutputStream outputStream = socket.getOutputStream();
         String line = null;
-//        bufferedReader.readLine();
-//        bufferedReader.readLine();
-        //String command = bufferedReader.readLine();
         String command = null;
-        //System.out.println(command);
         while ((command = bufferedReader.readLine()) != null) {
             if (command.equalsIgnoreCase("echo")) {
                 String dollarString = bufferedReader.readLine();
@@ -26,9 +25,17 @@ public class RedisProtocolHandler {
                 outputStream.flush();
             }
             if (command != null && command.equalsIgnoreCase("ping")) {
-
                 outputStream.write("+PONG\r\n".getBytes());
                 outputStream.flush();
+            }
+            if (command.equalsIgnoreCase("SET")){
+                String keyName = bufferedReader.readLine();
+                String value = bufferedReader.readLine();
+                keyValueMap.put(keyName,"$"+value.length()+"\r\n"+value+"\r\n");
+            }
+            if(command.equalsIgnoreCase("GET")){
+                String keyName = bufferedReader.readLine();
+                keyValueMap.getOrDefault(keyName,"$-1\r\n");
             }
         }
 

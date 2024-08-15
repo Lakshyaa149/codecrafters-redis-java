@@ -9,10 +9,10 @@ public class RedisProtocolHandler {
     public void handleRequestAndResponse(Socket socket) throws IOException {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        String line = null;
-        while((line = bufferedReader.readLine())!=null) {
+        int  line = -1;
+        while(( line = bufferedReader.read())!=-1) {
 
-            line = bufferedReader.readLine();
+            line = bufferedReader.read();
             System.out.println("line " + line);
         }
         String response = null;

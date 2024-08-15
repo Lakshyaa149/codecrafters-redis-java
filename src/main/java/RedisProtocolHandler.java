@@ -14,7 +14,7 @@ public class RedisProtocolHandler {
         System.out.println(asciiNo);
         if(asciiNo == '*'){
             asciiNo = (char)bufferedReader.read();
-            System.out.println(asciiNo);
+            System.out.println("here main"+Character.getNumericValue(asciiNo));
             for(int i=0;i<Character.getNumericValue(asciiNo);i++){
                 skipCharacters(bufferedReader);
                 char ascii = (char)bufferedReader.read();

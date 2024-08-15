@@ -16,6 +16,7 @@ public class RedisProtocolHandler {
             System.out.println(ascii);
             for(int i=0;i<(int)ascii;i++){
                 ascii = (char)bufferedReader.read();
+                skipCharacters(bufferedReader);
                 System.out.println(ascii);
                 if((char)ascii == '$'){
                     outputStream.write(handleBulkString(bufferedReader).getBytes());

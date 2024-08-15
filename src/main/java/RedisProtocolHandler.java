@@ -16,6 +16,7 @@ public class RedisProtocolHandler {
             asciiNo = (char)bufferedReader.read();
             System.out.println(asciiNo);
             for(int i=0;i<Character.getNumericValue(asciiNo);i++){
+
                 skipCharacters(bufferedReader);
                 char ascii = (char)bufferedReader.read();
                 System.out.println(ascii);
@@ -23,6 +24,7 @@ public class RedisProtocolHandler {
                     String resp = handleBulkString(bufferedReader);
                     System.out.println("response"+resp);
                 }
+                System.out.println("outer loop"+i);
             }
 
         }

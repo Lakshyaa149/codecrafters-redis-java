@@ -35,7 +35,7 @@ public class RedisProtocolHandler {
         return sb.toString();
     }
 
-    private static String handleBulkString(BufferedReader bufferedReader) throws IOException {
+    private String handleBulkString(BufferedReader bufferedReader) throws IOException {
         StringBuilder sb = new StringBuilder();
         String line;
         int ascii;

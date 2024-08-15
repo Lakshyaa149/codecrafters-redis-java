@@ -12,12 +12,14 @@ public class RedisProtocolHandler {
         bufferedReader.readLine();
         bufferedReader.readLine();
         String command = bufferedReader.readLine();
+        System.out.println(command);
         if(command.equalsIgnoreCase("echo")){
             String dollarString = bufferedReader.readLine();
             String no=dollarString.substring(1);
 
             String message =  bufferedReader.readLine();
             String response = "$"+no+"\r\n"+message+"\r\n";
+            System.out.println(message);
             outputStream.write(response.getBytes());
             outputStream.flush();
         }

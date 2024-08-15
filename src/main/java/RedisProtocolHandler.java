@@ -9,13 +9,13 @@ public class RedisProtocolHandler {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         OutputStream outputStream = new BufferedOutputStream(socket.getOutputStream());
 
-        int ascii = bufferedReader.read();
+        char ascii = (char)bufferedReader.read();
         System.out.println(ascii);
-        if((char)ascii == '*'){
-            ascii = bufferedReader.read();
-            System.out.println(ascii);
-            for(int i=0;i<ascii;i++){
-                ascii = bufferedReader.read();
+        if(ascii == '*'){
+            int no = bufferedReader.read();
+            System.out.println(no);
+            for(int i=0;i<no;i++){
+                ascii = (char)bufferedReader.read();
                 System.out.println(ascii);
                 if((char)ascii == '$'){
                     outputStream.write(handleBulkString(bufferedReader).getBytes());

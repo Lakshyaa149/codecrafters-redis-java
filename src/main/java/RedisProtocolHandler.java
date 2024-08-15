@@ -10,10 +10,13 @@ public class RedisProtocolHandler {
         OutputStream outputStream = new BufferedOutputStream(socket.getOutputStream());
 
         int ascii = bufferedReader.read();
+        System.out.println(ascii);
         if((char)ascii == '*'){
             ascii = bufferedReader.read();
+            System.out.println(ascii);
             for(int i=0;i<ascii;i++){
                 ascii = bufferedReader.read();
+                System.out.println(ascii);
                 if((char)ascii == '$'){
                     outputStream.write(handleBulkString(bufferedReader).getBytes());
                 }
@@ -37,11 +40,13 @@ public class RedisProtocolHandler {
         int ascii;
         // $3\r\nhey\r\n
         int noOfCharacters = bufferedReader.read();
+        System.out.println(noOfCharacters);
         skipCharacters(bufferedReader);
         for(int i=0; i<noOfCharacters;i++){
             sb.append((char)bufferedReader.read());
         }
         skipCharacters(bufferedReader);
+        System.out.println(sb.toString());
         return sb.toString();
     }
 

@@ -9,24 +9,27 @@ public class RedisProtocolHandler {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         OutputStream outputStream = socket.getOutputStream();
         String line = null;
-        bufferedReader.readLine();
-        bufferedReader.readLine();
-        String command = bufferedReader.readLine();
-        System.out.println(command);
-        if(command.equalsIgnoreCase("echo")){
-            String dollarString = bufferedReader.readLine();
-            String no=dollarString.substring(1);
+//        bufferedReader.readLine();
+//        bufferedReader.readLine();
+        //String command = bufferedReader.readLine();
+        String command = null;
+        //System.out.println(command);
+        while ((command = bufferedReader.readLine()) != null) {
+            if (command.equalsIgnoreCase("echo")) {
+                String dollarString = bufferedReader.readLine();
+                String no = dollarString.substring(1);
 
-            String message =  bufferedReader.readLine();
-            String response = "$"+no+"\r\n"+message+"\r\n";
-            System.out.println(message);
-            outputStream.write(response.getBytes());
-            outputStream.flush();
-        }
-        if(command != null && command.equalsIgnoreCase("ping")){
+                String message = bufferedReader.readLine();
+                String response = "$" + no + "\r\n" + message + "\r\n";
+                System.out.println(message);
+                outputStream.write(response.getBytes());
+                outputStream.flush();
+            }
+            if (command != null && command.equalsIgnoreCase("ping")) {
 
-            outputStream.write("+PONG\r\n".getBytes());
-            outputStream.flush();
+                outputStream.write("+PONG\r\n".getBytes());
+                outputStream.flush();
+            }
         }
 
 

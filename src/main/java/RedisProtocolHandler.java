@@ -7,6 +7,11 @@ public class RedisProtocolHandler {
     public void  handleRequestAndResponse(Socket socket) throws IOException {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        String line = null;
+        while((line=bufferedReader.readLine())!=null){
+            System.out.println("line is "+line);
+        }
+
         OutputStream outputStream = socket.getOutputStream();
 
 

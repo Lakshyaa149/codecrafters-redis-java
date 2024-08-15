@@ -9,6 +9,7 @@ public class RedisProtocolHandler {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         OutputStream outputStream = new BufferedOutputStream(socket.getOutputStream());
 
+
         char asciiNo = (char)bufferedReader.read();
         System.out.println(asciiNo);
         if(asciiNo == '*'){
@@ -19,7 +20,8 @@ public class RedisProtocolHandler {
                 char ascii = (char)bufferedReader.read();
                 System.out.println(ascii);
                 if((char)ascii == '$'){
-                    outputStream.write(handleBulkString(bufferedReader).getBytes());
+                    String resp = handleBulkString(bufferedReader);
+                    System.out.println("response"+resp);
                 }
             }
 

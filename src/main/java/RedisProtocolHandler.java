@@ -14,7 +14,7 @@ public class RedisProtocolHandler {
         if(asciiNo == '*'){
             asciiNo = (char)bufferedReader.read();
             System.out.println(asciiNo);
-            for(int i=0;i<(int)asciiNo;i++){
+            for(int i=0;i<asciiNo;i++){
                 skipCharacters(bufferedReader);
                 char ascii = (char)bufferedReader.read();
                 System.out.println(ascii);
@@ -43,7 +43,7 @@ public class RedisProtocolHandler {
         char  chNo = (char)bufferedReader.read();
         System.out.println("printing here"+chNo);
         skipCharacters(bufferedReader);
-        for(int i=0; i<(int)chNo;i++){
+        for(int i=0; i<chNo;i++){
             System.out.println("i="+i);
             char ch = (char)bufferedReader.read();
             sb.append(ch);

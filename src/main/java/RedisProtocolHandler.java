@@ -23,7 +23,7 @@ public class RedisProtocolHandler {
             outputStream.write(response.getBytes());
             outputStream.flush();
         }
-        if(command.equalsIgnoreCase("ping")){
+        if(command != null && command.equalsIgnoreCase("ping")){
 
             outputStream.write("+PONG\r\n".getBytes());
             outputStream.flush();

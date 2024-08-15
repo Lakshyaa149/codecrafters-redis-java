@@ -12,7 +12,7 @@ public class RedisProtocolHandler {
         int  line = -1;
         while(( line = bufferedReader.read())!=-1) {
 
-            line = bufferedReader.read();
+
             System.out.println("line " + line);
         }
         String response = null;

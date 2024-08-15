@@ -18,6 +18,7 @@ public class RedisProtocolHandler {
             line = bufferedReader.readLine();
             response = "$" + line.length() + "\r\n" + line + "\r\n";
         }
+        System.out.println("response" +response);
         socket.getOutputStream().write(response.getBytes());
     }
 

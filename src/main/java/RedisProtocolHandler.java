@@ -40,7 +40,7 @@ public class RedisProtocolHandler {
         int ascii;
         // $3\r\nhey\r\n
         char  ch = (char)bufferedReader.read();
-        System.out.println(ch);
+        System.out.println("printing here"+ch);
         skipCharacters(bufferedReader);
         for(int i=0; i<(int)ch;i++){
             ch = (char)bufferedReader.read();

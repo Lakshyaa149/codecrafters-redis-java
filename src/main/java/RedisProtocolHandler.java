@@ -7,32 +7,42 @@ public class RedisProtocolHandler {
     public void  handleRequestAndResponse(Socket socket) throws IOException {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        String line = null;
-        while((line=bufferedReader.readLine())!=null){
-            System.out.println("line is "+line);
-        }
-
         OutputStream outputStream = socket.getOutputStream();
+        String line = null;
+        bufferedReader.readLine();
+        bufferedReader.readLine();
+        String command = bufferedReader.readLine();
+        if(command.equalsIgnoreCase("echo")){
+            String dollarString = bufferedReader.readLine();
+            String no=dollarString.substring(1);
 
-
-        char asciiNo = (char)bufferedReader.read();
-        System.out.println(asciiNo);
-        if(asciiNo == '*'){
-            asciiNo = (char)bufferedReader.read();
-            System.out.println("here main"+Character.getNumericValue(asciiNo));
-            for(int i=0;i<Character.getNumericValue(asciiNo);i++){
-                skipCharacters(bufferedReader);
-                char ascii = (char)bufferedReader.read();
-                System.out.println("reading here"+ascii);
-                if((char)ascii == '$'){
-                    String resp = handleBulkString(bufferedReader);
-                    outputStream.write(resp.getBytes());
-                    System.out.println("response"+resp);
-                }
-                System.out.println("outer loop"+i);
-            }
-
+            String message =  bufferedReader.readLine();
+            String response = "$"+no+"\r\n"+message+"\r\n";
+            outputStream.write(response.getBytes());
+            outputStream.flush();
         }
+
+
+
+//
+//        char asciiNo = (char)bufferedReader.read();
+//        System.out.println(asciiNo);
+//        if(asciiNo == '*'){
+//            asciiNo = (char)bufferedReader.read();
+//            System.out.println("here main"+Character.getNumericValue(asciiNo));
+//            for(int i=0;i<Character.getNumericValue(asciiNo);i++){
+//                skipCharacters(bufferedReader);
+//                char ascii = (char)bufferedReader.read();
+//                System.out.println("reading here"+ascii);
+//                if((char)ascii == '$'){
+//                    String resp = handleBulkString(bufferedReader);
+//                    outputStream.write(resp.getBytes());
+//                    System.out.println("response"+resp);
+//                }
+//                System.out.println("outer loop"+i);
+//            }
+//
+//        }
     }
 
     private String handleSimpleString(BufferedReader bufferedReader) throws IOException {

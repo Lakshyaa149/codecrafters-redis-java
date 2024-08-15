@@ -21,7 +21,7 @@ public class RedisProtocolHandler {
                 System.out.println("reading here"+ascii);
                 if((char)ascii == '$'){
                     String resp = handleBulkString(bufferedReader);
-                    outputStream.write(resp.getBytes())
+                    outputStream.write(resp.getBytes());
                     System.out.println("response"+resp);
                 }
                 System.out.println("outer loop"+i);

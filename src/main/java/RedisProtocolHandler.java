@@ -30,6 +30,7 @@ public class RedisProtocolHandler {
                 outputStream.flush();
             }
             if (command != null && command.equalsIgnoreCase("SET")){
+                bufferedReader.readLine();
                 String keyName = bufferedReader.readLine();
                 String value = bufferedReader.readLine();
                 keyValueMap.put(keyName,"$"+value.length()+"\r\n"+value+"\r\n");

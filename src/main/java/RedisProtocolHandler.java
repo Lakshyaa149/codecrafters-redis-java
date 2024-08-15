@@ -7,7 +7,7 @@ public class RedisProtocolHandler {
     public void  handleRequestAndResponse(Socket socket) throws IOException {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        OutputStream outputStream = new BufferedOutputStream(socket.getOutputStream());
+        OutputStream outputStream = clientSocket.getOutputStream();
 
 
         char asciiNo = (char)bufferedReader.read();

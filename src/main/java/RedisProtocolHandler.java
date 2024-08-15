@@ -14,6 +14,7 @@ public class RedisProtocolHandler {
         String line = null;
         String command = null;
         while ((command = bufferedReader.readLine()) != null) {
+            System.out.println(command);
             if (command.equalsIgnoreCase("echo")) {
                 String dollarString = bufferedReader.readLine();
                 String no = dollarString.substring(1);

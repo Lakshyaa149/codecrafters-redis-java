@@ -12,9 +12,9 @@ public class RedisProtocolHandler {
         char ascii = (char)bufferedReader.read();
         System.out.println(ascii);
         if(ascii == '*'){
-            int no = bufferedReader.read();
-            System.out.println(no);
-            for(int i=0;i<no;i++){
+            ascii = (char)bufferedReader.read();
+            System.out.println(ascii);
+            for(int i=0;i<(int)ascii;i++){
                 ascii = (char)bufferedReader.read();
                 System.out.println(ascii);
                 if((char)ascii == '$'){

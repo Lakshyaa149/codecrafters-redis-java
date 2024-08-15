@@ -43,7 +43,8 @@ public class RedisProtocolHandler {
         System.out.println(noOfCharacters);
         skipCharacters(bufferedReader);
         for(int i=0; i<noOfCharacters;i++){
-            sb.append((char)bufferedReader.read());
+            char ch = (char)bufferedReader.read();
+            System.out.println(ch);
         }
         skipCharacters(bufferedReader);
         System.out.println(sb.toString());

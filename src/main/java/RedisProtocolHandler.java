@@ -39,11 +39,11 @@ public class RedisProtocolHandler {
         String line;
         int ascii;
         // $3\r\nhey\r\n
-        int noOfCharacters = bufferedReader.read();
-        System.out.println(noOfCharacters);
+        char  ch = (char)bufferedReader.read();
+        System.out.println(ch);
         skipCharacters(bufferedReader);
-        for(int i=0; i<noOfCharacters;i++){
-            char ch = (char)bufferedReader.read();
+        for(int i=0; i<(int)ch;i++){
+            ch = (char)bufferedReader.read();
             System.out.println(ch);
         }
         skipCharacters(bufferedReader);
